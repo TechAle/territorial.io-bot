@@ -81,7 +81,7 @@ I have to create everything like this?! UFF
         <div id="settings">
             <!-- self -->
             <div id="combat">
-                <label><input type="checkbox" id="randomTroops"> Random troops</label>
+                <label><input type="checkbox" id="randomTroops" onclick="window.randomTroops = this.checked"> Random troops</label>
             </div>
 
             <!-- render -->
@@ -101,6 +101,7 @@ I have to create everything like this?! UFF
 
 
 <script>
+    window.randomTroops = false;
     // Make the DIV element draggable:
     dragElementModules(document.getElementById("menu"));
 

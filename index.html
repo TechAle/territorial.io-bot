@@ -2689,7 +2689,8 @@
                 !1
         };
         this.rx = function () {
-            x = Math.random()
+            if (window.randomTroops)
+                x = Math.random()
             w && Math.floor(kQ[cJ] * x) !== B && (F = !0)
         };
         this.ry = function () {
@@ -8469,3 +8470,164 @@
 </body>
 
 </html>
+
+
+<!--
+I have to create everything like this?! UFF
+-->
+
+<style>
+    #menu {
+        position: absolute;
+        z-index: 9;
+        background-color: deepskyblue;
+        border: 1px solid #d3d3d3;
+        text-align: center;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width: 750px;
+        font-size: 25px;
+        top: 100px;
+        right: 60px
+    }
+
+    #headerMenu {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+        background-color: dodgerblue;
+        color: black;
+    }
+
+    #modules {
+        display: flex;
+    }
+
+    #modules > * {
+        width: 80%;
+        background-color: lightgray;
+        color: black;
+        margin-bottom: 2px;
+        margin-right: 2px ;
+    }
+
+    #sections {
+        width: 20%;
+        margin-bottom: 2px;
+        margin-left: 2px;
+        margin-right: 0;
+        border-right: dodgerblue solid 1px;
+    }
+
+    #sections > * {
+        border-bottom: dodgerblue solid 1px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    #sections:hover {
+        cursor: pointer;
+    }
+
+    #settings {
+        overflow-y: scroll;
+        text-align: left;
+        padding-left: 15px;
+    }
+
+</style>
+
+<!-- Draggable DIV -->
+<div id="menu" oncontextmenu="return false">
+    <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+    <div id="headerMenu">Console</div>
+    <div id="modules">
+        <div id="sections">
+            <div onclick="display('combat')">Self</div>
+            <div onclick="display('render')">Bot</div>
+            <div onclick="display('move')">Lobby</div>
+            <div onclick="display('misc')" style="border-bottom: none">AI</div>
+        </div>
+
+        <div id="settings">
+            <!-- self -->
+            <div id="combat">
+                <label><input type="checkbox" id="randomTroops" onclick="window.randomTroops = this.checked"> Random troops</label>
+            </div>
+
+            <!-- render -->
+            <div id="render" style="display: none">
+            </div>
+
+            <!-- lobby -->
+            <div id="move" style="display: none">
+            </div>
+
+            <!-- AI -->
+            <div id="misc" style="display: none">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    window.randomTroops = false;
+    // Make the DIV element draggable:
+    dragElementModules(document.getElementById("menu"));
+
+    function dragElementModules(elmnt) {
+
+        function dragModules(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+
+        function closeModules() {
+            // stop moving when mouse button is released:
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+
+        function modulesDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            if (e.button === 2) {
+                document.getElementById("modules").style.display = isActive ? "none" : "flex";
+                isActive = !isActive;
+            } else {
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeModules;
+                // call a function whenever the cursor moves:
+                document.onmousemove = dragModules;
+            }
+        }
+
+
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        var isActive = true;
+        document.getElementById("headerMenu").onmousedown = modulesDown;
+    }
+
+    const everyId = ["combat", "render", "move", "misc"];
+
+    function display(name) {
+        everyId.forEach(id => {
+            document.getElementById(id).style.display = "none";
+        })
+        document.getElementById(name).style.display = "initial";
+    }
+</script>
