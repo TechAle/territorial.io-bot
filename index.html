@@ -1422,7 +1422,7 @@
 
     function pP() {
         function b(G, L, N, Q) {
-            // menu choose emoj
+            // menu choose (background)
             for (var J, I = 0; I < G.length; I++) {
                 L.push(document.createElement("canvas"));
                 L[I].width = N;
@@ -2120,8 +2120,11 @@
         this.xR = 0;
         this.vz = function() {
             var b;
+            // Global emoj
             this.xP = Array(this.xH);
+            window.emojExists = this.xP;
             this.xQ = Array(this.xH);
+            window.emojActual = this.xQ;
             var d = d1.zO("emojis");
             this.xS();
             for (b = this.xO = 0; b < this.xD; b++) this.xT(b, b, d);
@@ -2244,7 +2247,9 @@
         // Show emoj main
         this.ry = function() {
             kb.imageSmoothingEnabled = !0;
-            for (var b = this.xN * this.xI / 2, d = this.xO - 1; 0 <= d; d--) kb.setTransform(this.da, 0, 0, this.da, this.xL[d] + b, this.xM[d] + b), kb.drawImage(this.e6[this.xQ[d]], 0, 0);
+            for (var b = this.xN * this.xI / 2, d = this.xO - 1; 0 <= d; d--)
+                kb.setTransform(this.da, 0, 0, this.da, this.xL[d] + b, this.xM[d] + b),
+                    kb.drawImage(this.e6[this.xQ[d]], 0, 0);
             kb.imageSmoothingEnabled = !1;
             kb.setTransform(1, 0, 0, 1, 0, 0)
         };
@@ -5216,7 +5221,7 @@
             this.g9 = !0;
             this.yh = !1
         };
-        // Emoj
+        // Emoj select
         this.w2 = function(b, d, c) {
             var g = (ki - this.ar) / 2;
             b -= (kh - this.a5) / 2;
@@ -9397,6 +9402,12 @@ I have to create everything like this?! UFF
         padding-left: 15px;
     }
 
+    hr {
+        margin-right: 10px;
+        width: 98%;
+    }
+
+
 </style>
 
 <!-- Draggable DIV -->
@@ -9414,7 +9425,11 @@ I have to create everything like this?! UFF
         <div id="settings">
             <!-- self -->
             <div id="combat">
-                <label><input type="checkbox" onclick="window.randomTroops = this.checked"> Random troops</label>
+                <label><input type="checkbox" onclick="window.randomTroops = this.checked"> Random troops</label><hr>
+                <label><input type="number" value="1" id="emoj">
+                    <input type="submit" value="toggle emoj" onclick="toggleEmoj(document.getElementById('emoj').value)">
+                    <input type="submit" value="reset emoj" onclick="resetEmoj()"> </label>
+                    <input type="submit" value="active emojs" onclick="activeEmojs()"> </label>
             </div>
 
             <!-- render -->
@@ -9423,7 +9438,7 @@ I have to create everything like this?! UFF
 
             <!-- lobby -->
             <div id="move" style="display: none">
-                <label><input type="checkbox" onclick="window.freezeAI = this.checked"> Freeze AI</label>
+                <label><input type="checkbox" onclick="window.freezeAI = this.checked" value="0"> Freeze AI</label>
             </div>
 
             <!-- AI -->
@@ -9439,6 +9454,51 @@ I have to create everything like this?! UFF
     window.freezeAI = false;
     // Make the DIV element draggable:
     dragElementModules(document.getElementById("menu"));
+
+    function toggleEmoj(number) {
+        if (number !== undefined && number >= 0 && number <= window.emojExists.length) {
+            number = parseInt(number);
+            const statusEmoj = window.emojExists[number]
+            let i = 0;
+            if (statusEmoj) {
+                do {
+                    if (window.emojActual[i] === number)
+                        break;
+                    else i++;
+                }while(true);
+                for(let j = i; j < window.emojExists.length - 1; j++)
+                    window.emojActual[j] = window.emojActual[j + 1];
+            } else {
+                let foundBefore = false;
+                do {
+                    if (window.emojActual[i] === 0) {
+                        if (window.emojExists[0] && !foundBefore) {
+                            foundBefore = true;
+                        }else
+                            break;
+                    }else i++;
+                }while(true);
+                window.emojActual[i] = number;
+            }
+
+            window.emojExists[number] = !statusEmoj;
+        }
+    }
+
+    function resetEmoj() {
+        for(let i = 0; i < window.emojExists.length; i++) {
+            window.emojExists[i] = false;
+            window.emojActual[i] = 0;
+        }
+    }
+
+    function activeEmojs() {
+        resetEmoj();
+        for(let i = 0; i < window.emojExists.length; i++) {
+            window.emojExists[i] = true;
+            window.emojActual[i] = i;
+        }
+    }
 
     function dragElementModules(elmnt) {
 
