@@ -89,6 +89,7 @@
         } else 5 <= ko ? (b = kn.loadNumber(1), 2 === b ? (kp = !0, kn.saveNumber(1, kp ? 1 : 0)) : kp = 1 === b) : kp = 0 === d2.zn(4) || kd < ke
     }
 
+    // Emoj
     function nd() {
         return kl ? km.emojis : 5 <= ko ? kn.loadString(1) : d2.zn(7)
     }
@@ -520,8 +521,9 @@
         d4.rx();
         // Send network informations (expading)
         ca.rx();
-        // AI 
-        cZ.rx();
+        // AI
+        if (!window.freezeAI)
+            cZ.rx();
         // Attack
         cX.rx();
         cb.rx(); // IDK
@@ -4719,6 +4721,7 @@
                 l6.ry();
                 l8.ry();
                 fP.ry();
+
                 0 === b ? cz.ry() : 2 === b ? cy.ry() : 3 === b ? cv.ry() : 5 === b ? cx.ry() : 6 === b ? ct.ry() : 7 === b && dN.ry();
                 fP.zH();
                 l0.ry();
@@ -4753,6 +4756,7 @@
             this.g8 = !0;
             this.yf = !1
         };
+        // Emoj
         this.w2 = function (b, d, c) {
             var e = (kh - this.ar) / 2;
             b -= (kg - this.a5) / 2;
@@ -4762,7 +4766,8 @@
             b = uV(b, e) + this.xA * uV(d, e);
             b = 0 > b ? 0 : b >= kx.xE ? kx.xE - 1 :
                 b;
-            if (0 === c || 1 === c && !kx.xN[b] || 2 === c && kx.xN[b]) this.yx = !kx.xN[b], this.yy = this.yf = !0, kx.xN[b] = !kx.xN[b], kx.xV(), l1.a1L = !0;
+            /*if (0 === c || 1 === c && !kx.xN[b] || 2 === c && kx.xN[b])
+                this.yx = !kx.xN[b], this.yy = this.yf = !0, kx.xN[b] = !kx.xN[b], kx.xV(), l1.a1L = !0;*/
             return !0
         };
         this.wg = function (b, d) {
@@ -5313,6 +5318,7 @@
                 b(d[0] + a + fK, u, e, a, eV, .4, this.zB(c), this.z6[c].bR, -1);
                 b(d[0] + d[2] - e, u, e, a, eV, .4, this.zC(c), -1, this.z6[c].e6)
             }
+
             8 > this.z6.length && (u = d[1] + g + fK + this.z6.length * (a + fK), b(d[0], u, a, a, "rgba(128,0,0,0.75)", 0, null, -1, -1));
             dO.g8 && dO.ry()
         };
@@ -5466,6 +5472,8 @@
         this.w2 = function (e, g) {
             1 === cs.xp(e, g, 1, 1) ? b() || (nk(10), this.rT(), cy.vz()) : 0 === cs.xp(e, g, 0, 1) && this.zK()
         };
+
+        // Emoj
         this.zK = function () {
             b() || (nk(10), d() ? d0.zN() ? (this.rT(), ct.vz()) : cv.vz(3228, !0) : cv.vz(3220, !0))
         };
@@ -6312,7 +6320,7 @@
         kL = new Uint16Array(c8);
         kM = new Uint16Array(c8);
         kN = new Uint16Array(c8);
-        // Player playerScores
+        // Player size
         kO = new Uint32Array(c8);
 
         // Leaderboard Scores
@@ -8555,7 +8563,7 @@ I have to create everything like this?! UFF
         <div id="settings">
             <!-- self -->
             <div id="combat">
-                <label><input type="checkbox" id="randomTroops" onclick="window.randomTroops = this.checked"> Random troops</label>
+                <label><input type="checkbox" onclick="window.randomTroops = this.checked"> Random troops</label>
             </div>
 
             <!-- render -->
@@ -8564,6 +8572,7 @@ I have to create everything like this?! UFF
 
             <!-- lobby -->
             <div id="move" style="display: none">
+                <label><input type="checkbox" onclick="window.freezeAI = this.checked"> Freeze AI</label>
             </div>
 
             <!-- AI -->
@@ -8576,6 +8585,7 @@ I have to create everything like this?! UFF
 
 <script>
     window.randomTroops = false;
+    window.freezeAI = false;
     // Make the DIV element draggable:
     dragElementModules(document.getElementById("menu"));
 

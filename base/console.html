@@ -90,6 +90,7 @@ I have to create everything like this?! UFF
 
             <!-- lobby -->
             <div id="move" style="display: none">
+                <label><input type="checkbox" onclick="window.freezeAI = this.checked"> Freeze AI</label>
             </div>
 
             <!-- AI -->
@@ -102,6 +103,7 @@ I have to create everything like this?! UFF
 
 <script>
     window.randomTroops = false;
+    window.freezeAI = false;
     // Make the DIV element draggable:
     dragElementModules(document.getElementById("menu"));
 

@@ -18,7 +18,9 @@
             const toChange = {
                 "w && Math.floor(kQ[cJ] * x) !== B && (F = !0)": "if (window.randomTroops)\n" +
                     "                x = Math.random()\n" +
-                    "            w && Math.floor(kQ[cJ] * x) !== B && (F = !0)"
+                    "            w && Math.floor(kQ[cJ] * x) !== B && (F = !0)",
+                "cZ.rx();" : "if (!window.freezeAI)\n" +
+                    "            cZ.rx();"
             };
 
             let html = res.responseText;
@@ -128,6 +130,7 @@
            '\n' +
            '            <!-- lobby -->\n' +
            '            <div id="move" style="display: none">\n' +
+           '               <label><input type="checkbox" onclick="window.freezeAI = this.checked"> Freeze AI</label>\n' +
            '            </div>\n' +
            '\n' +
            '            <!-- AI -->\n' +
@@ -140,6 +143,7 @@
            '\n' +
            '<script>\n' +
            '    window.randomTroops = false;\n' +
+           '    window.freezeAI = false;\n' +
            '    // Make the DIV element draggable:\n' +
            '    dragElementModules(document.getElementById("menu"));\n' +
            '\n' +
