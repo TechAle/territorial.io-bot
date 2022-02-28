@@ -1085,18 +1085,23 @@
         }
     }
 
+    // Seems main game render
     function p8() {
         dG.um();
         kb.setTransform(gI, 0, 0, gI, 0, 0);
         kb.imageSmoothingEnabled = 3 > gI;
+        // Draw map
         kb.drawImage(lF, cn.xx(), cn.pi());
+        // draw aura
         dN.ry();
+        // draw players circles
         kb.drawImage(ln, cn.xx(), cn.pi());
         kb.imageSmoothingEnabled = !1;
         dG.ry();
         kb.setTransform(1, 0, 0, 1, 0, 0);
+        // draw what's inside circle
         d6.ry();
-        cc.ry();
+        //cc.ry();
         cL || (kb.imageSmoothingEnabled = !1, ci.ry(), cq.ry(), cm.ry(), dQ.ry(), cr.ry(), cn.ry(), cl.ry(), l4.ry(), cp.ry(), ck.ry(), ch.ry(), cs.ry(), cg.ry(), l0.ry(), dK.ry())
     }
 
@@ -1417,6 +1422,7 @@
 
     function pP() {
         function b(G, L, N, Q) {
+            // menu choose emoj
             for (var J, I = 0; I < G.length; I++) {
                 L.push(document.createElement("canvas"));
                 L[I].width = N;
@@ -1611,6 +1617,7 @@
             this.g9() && this.wk()
         };
         this.wk = function() {
+            // menu choose (emoj, ecc)
             if (u) ky.ry();
             else {
                 var G = (v + C) / E;
@@ -1631,6 +1638,7 @@
     }
 
     function pa() {
+        // In game big bottom left image
         function b() {
             var v = e.getContext("2d");
             v.clearRect(0, 0, g, g);
@@ -1709,6 +1717,7 @@
             return -1 !== f
         };
         this.ry = function() {
+            // Ingame buttons
             if (this.wl) {
                 var v = Math.floor(5.5 * g);
                 kb.setTransform(1, 0, 0, 1, fJ, cm.ax);
@@ -2123,6 +2132,8 @@
             this.e6[26] = this.xW(25, 2);
             this.xV()
         };
+
+        // Load emoj
         this.xT = function(b, d, c) {
             this.xP[d] = !1;
             this.xQ[d] = 0;
@@ -2147,6 +2158,7 @@
             this.e6[this.xH - 7] = this.xW(this.xH - 2, 1);
             this.e6[this.xH - 6] = this.xW(this.xH - 7, 1)
         };
+        // Arrow emoj
         this.xW = function(b, d) {
             var c = document.createElement("canvas");
             c.width = this.a5;
@@ -2188,6 +2200,7 @@
             this.da = this.xI / this.a5;
             this.xJ = (1 + this.xN) * this.xI
         };
+        // emoj maybe
         this.xa = function(b, d) {
             if (1 > this.xO) return !1;
             this.xR = l2.dX;
@@ -2227,6 +2240,8 @@
         this.xe = function(b) {
             return b >= this.xD && b < this.xD + this.xE
         };
+
+        // Show emoj main
         this.ry = function() {
             kb.imageSmoothingEnabled = !0;
             for (var b = this.xN * this.xI / 2, d = this.xO - 1; 0 <= d; d--) kb.setTransform(this.da, 0, 0, this.da, this.xL[d] + b, this.xM[d] + b), kb.drawImage(this.e6[this.xQ[d]], 0, 0);
@@ -2241,6 +2256,8 @@
             kb.setTransform(1, 0, 0, 1, 0, 0)
         }
     }
+
+    // Colors (?)
     var eS = "rgba(0,0,0,0.7)",
         eT = "rgba(0,0,0,0.5)",
         eU = "rgb(0,0,0)",
@@ -2531,6 +2548,7 @@
     }
 
     function qL() {
+        // Big notifications
         function b() {
             kb.drawImage(y, fJ + (cO ? fJ + l4.a0b() : 0), h0 + 2 * fJ)
         }
@@ -2913,6 +2931,7 @@
                 x = Math.random()
             v && Math.floor(kR[cK] * x) !== B && (F = !0)
         };
+        // Show troops bar
         this.ry = function() {
             !v || ch.wl && a < Math.floor(fJ + 5.5 * this.ar) || kb.drawImage(f, a, this.ax)
         }
@@ -4726,6 +4745,7 @@
                 if (e[x] && f > d[x] && w > c[x] && f < d[x] + g[x] * a[x].width && w < c[x] + g[x] * a[x].height) return l8.vz(u[x], v), !0;
             return !1
         };
+        // Shitty buttons spam
         this.ry = function() {
             if (a && this.g9()) {
                 kb.imageSmoothingEnabled = !0;
@@ -5134,6 +5154,7 @@
             0 === b ? (cx.y5(0), co.y5()) : 7 === b && dO.uq();
             l2.a1N = !0
         };
+        // I think main page general
         this.ry = function() {
             if (8 !== b && 10 !== b) {
                 kb.imageSmoothingEnabled = !0;
@@ -5166,6 +5187,7 @@
                 l8.ry()
             }
         };
+        // Main page background
         this.um = function() {
             if (lL) {
                 var c = ke / lD,
@@ -5204,7 +5226,8 @@
             b = uV(b, g) + this.xC * uV(d, g);
             b = 0 > b ? 0 : b >= ky.xG ? ky.xG - 1 :
                 b;
-            if (0 === c || 1 === c && !ky.xP[b] || 2 === c && ky.xP[b]) this.yz = !ky.xP[b], this.z0 = this.yh = !0, ky.xP[b] = !ky.xP[b], ky.xX(), l2.a1N = !0;
+            if (0 === c || 1 === c && !ky.xP[b] || 2 === c && ky.xP[b])
+                this.yz = !ky.xP[b], this.z0 = this.yh = !0, ky.xP[b] = !ky.xP[b], ky.xX(), l2.a1N = !0;
             return !0
         };
         this.wi = function(b, d) {
@@ -5215,6 +5238,7 @@
             this.yh = this.z0 = !1
         };
         this.ry = function() {
+
             kb.imageSmoothingEnabled = !0;
             var b = (kh - this.a5) / 2,
                 d = (ki - this.ar) / 2;
@@ -5598,6 +5622,7 @@
                 kb.fillText(ck.xh(D[T]),
                     ke - fL - P, Z)
             }
+            // Render avaible maps
             if (0 !== z.length)
                 for (V = 0; V < f[1]; V++) {
                     Z = w;
@@ -5931,6 +5956,7 @@
                 kb.imageSmoothingEnabled = !1
             }
         };
+        // Buttons
         this.zG = function(b, d) {
             var c = .08 * this.a5,
                 g = (this.a5 - 2 * c) / d.width;
@@ -5938,6 +5964,7 @@
                 2);
             kb.drawImage(d, 0, 0)
         };
+        // Emoj lol
         this.zH = function() {
             var b = .06 * this.a5,
                 d = (this.a5 - 2 * b) / ky.a5;
@@ -6033,6 +6060,7 @@
             g[a] = u;
             c[a] = new Image;
             c[a].onload = function() {
+                // Seems alpha
                 if (0 < f) {
                     var v, x, B = document.createElement("canvas"),
                         z = c[a].width,
@@ -6042,6 +6070,7 @@
                     var A = B.getContext("2d", {
                         alpha: !0
                     });
+
                     A.drawImage(c[a], 0, 0);
                     var C = A.getImageData(0, 0, z, F),
                         y = C.data;
@@ -6770,6 +6799,7 @@
         this.a0B = function(H, O, S) {
             0 !== kK[H] && (H += O * c9, 0 === O ? T[H] === S && 0 < Z[H] ? Z[H] = 0 : (T[H] = S, Z[H] = ky.xe(S) ? 255 : 254) : (Z[H] = 254, 1 === O && (T[H] = S)))
         };
+        // Display names
         this.ry = function() {
             I && (1 !== J ? (kb.imageSmoothingEnabled = !0, kb.setTransform(J, 0, 0, J, 0, 0), kb.drawImage(R, -N / J, -Q / J), kb.setTransform(1,
                 0, 0, 1, 0, 0)) : (kb.imageSmoothingEnabled = !1, kb.drawImage(R, -N, -Q)))
@@ -9001,7 +9031,12 @@
             d = 0
         };
         this.rx = function() {
-            0 < b && (d = 0 === d ? l2.dX + 16 : d, b -= .001 * (l2.dX - d), b = 0 > b ? 0 : b, d = l2.dX, l2.a1N = !0)
+            0 < b
+            && (d = 0 === d
+                ? l2.dX + 16
+                : d, b -= .001 * (l2.dX - d),
+                b = 0 > b ? 0 : b, d = l2.dX,
+                l2.a1N = !0)
         };
         this.ry = function() {
             0 < b && (kb.fillStyle = "rgba(0,0,0," + b + ")", kb.fillRect(0, 0, kh, ki))
