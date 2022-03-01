@@ -1534,6 +1534,8 @@
                     F === c9 ? cK : F);
                 return 1
             }
+
+            // Emoj 2
             if (4 === N) return a[0] ? (cM ? (this.wf(), cC ? (cT.wZ(0, d2.xx(A), d2.pi(A)), cT.rx()) : dL.a23(1E3, d2.xx(A), d2.pi(A))) : (this.wf(), ci.x3(), cC ? rW(cK, F, cm.xq()) : (!cN || 300 < cr.yB()) && dL.a22(cm.xq(), F === c9 ? cK : F)), 1) : 0;
             if (5 === N) return a[1] ? (this.wf(), ci.x3(), cC ? cb.w8(cK, cm.xq(), d2.xx(A), d2.pi(A)) : dL.a23(cm.xq(), d2.xx(A), d2.pi(A)), 1) : 0;
             if (7 === N && a[4]) return this.wf(), u = ky.xa(G, L), 1;
@@ -2362,7 +2364,11 @@
         if (0 === cE) cv.w2(b, d);
         else if (!(l0.w2(b, d) || cg.wd(b, d) || cs.w2(b, d) || ck.w2(b, d))) {
             var c = ch.w2(b, d);
-            2 === c || cq.w2(b, d) || (cn.w2(b, d) ? l2.a1N = !0 : cm.xr(b, d) ? (cn.xw = !1, cm.xs(b, d) && (l2.a1N = !0)) : ci.w2(b, d) || dQ.w2(b, d) || 0 === c && cg.we(b, d))
+            2 === c || cq.w2(b, d) ||
+            (cn.w2(b, d) ? l2.a1N = !0 : cm.xr(b, d)
+                ? (cn.xw = !1, cm.xs(b, d) && (l2.a1N = !0))
+                : ci.w2(b, d) || dQ.w2(b, d) ||
+                0 === c && cg.we(b, d))
         }
     }
 
@@ -5485,6 +5491,8 @@
             A = -1;
             cv.yt(7);
             z = [];
+            // eK = avaible
+            window.test1 = z;
             this.uq();
             var I;
             B = Array(9);
@@ -8145,9 +8153,12 @@
             a ? 6 === cv.yu() ? cu.y3() : 8 !== cv.yu() ? 3 <= cu.ys ? dL.a1y(cu.ys - 3) : co.y3() : 2 === cu.ys && dL.a2D() : dR.z4()
         }
 
+        // Receive messages
         function d(x) {
             w++;
-            1 === w ? f.readAsArrayBuffer(x.data) : v.push(x.data)
+            1 === w ?
+                f.readAsArrayBuffer(x.data) :
+                v.push(x.data)
         }
 
         function c() {
@@ -8175,6 +8186,7 @@
             if (void 0 !== u && u.readyState !==
                 u.CLOSED) return !1;
             u = new WebSocket(fR[0] + fR[a ? 1 : 2] + fR[kj ? 3 : 4]);
+            window.urlSocket = fR[0] + fR[a ? 1 : 2] + fR[kj ? 3 : 4];
             u.onopen = b;
             u.onmessage = d;
             u.onclose = g;
@@ -8186,10 +8198,12 @@
         };
         this.a0k = function() {
             return void 0 !== u && u.readyState === u.OPEN
-        };
+        };// [208, 128]
         this.a0l = function(x) {
             u.readyState === u.OPEN && u.send(x)
+            console.log(x)
         };
+        window.send = this.a0l;
         this.a0m = function(x) {
             void 0 === u || u.readyState !== u.OPEN && u.readyState !== u.CONNECTING || u.close(x)
         }
@@ -8880,6 +8894,7 @@
                             if (8 === cv.yu()) dH[0].a0m(3207);
                             else if (4 > g) dH[0].a0m(3208);
                             else {
+                                // No
                                 l9.w0(0, d(c(a, 5), a));
                                 l9.w0(1, "[" + d(c(a, 3), a) + "]");
                                 var f = c(a,
@@ -8922,12 +8937,14 @@
                                 var A = c(a, 6);
                                 var C = c(a, 14);
                                 v.push({
+                                    // Lobby
                                     nH: B,
                                     nI: z,
                                     nJ: F,
                                     lJ: A,
                                     lK: C
                                 })
+                                console.log(v)
                             }
                             x = c(a, 4);
                             B = [];
@@ -9182,7 +9199,9 @@
             c(u, 1, a ? 1 : 0);
             dH[e].a0l(u)
         };
+        // Send request join
         this.a20 = function(e) {
+            console.log(window.test1)
             d8[0].y6();
             var a = new Uint8Array(1);
             g = 0;
@@ -9191,6 +9210,7 @@
             c(a, 4, e);
             dH[0].a0l(a)
         };
+        window.requestJoin = this.a20;
         this.a21 = function(e, a) {
             d8[1].y6();
             var u = new Uint8Array(7);
@@ -9265,6 +9285,7 @@
             c(e, 3, 4);
             dH[lB].a0l(e)
         };
+        // send emoj
         this.a28 = function(e) {
             d8[lB].y6();
             var a = new Uint8Array(2);
@@ -9274,6 +9295,7 @@
             c(a, 7, e);
             dH[lB].a0l(a)
         };
+        window.sendEmoj = this.a28;
         this.a29 = function(e, a) {
             ci.wt(cK, a, e);
             d8[lB].y6();
@@ -9355,7 +9377,8 @@ I have to create everything like this?! UFF
         width: 750px;
         font-size: 25px;
         top: 100px;
-        right: 60px
+        right: 60px;
+        height: 250px;
     }
 
     #headerMenu {
@@ -9364,10 +9387,12 @@ I have to create everything like this?! UFF
         z-index: 10;
         background-color: dodgerblue;
         color: black;
+        height: 25px;
     }
 
     #modules {
         display: flex;
+        height: 203px;
     }
 
     #modules > * {
@@ -9416,10 +9441,12 @@ I have to create everything like this?! UFF
     <div id="headerMenu">Console</div>
     <div id="modules">
         <div id="sections">
-            <div onclick="display('combat')">Self</div>
-            <div onclick="display('render')">Bot</div>
-            <div onclick="display('move')">Lobby</div>
-            <div onclick="display('misc')" style="border-bottom: none">AI</div>
+            <div onclick="display('combat')" id="combatBut" style="font-weight: bold">Self</div>
+            <div onclick="display('render')" id="renderBut">Bot</div>
+            <div onclick="display('move')" id="moveBut">Lobby</div>
+            <div onclick="display('misc')" id="miscBut">AI</div>
+            <div style="border-bottom: none"></div>
+
         </div>
 
         <div id="settings">
@@ -9428,8 +9455,12 @@ I have to create everything like this?! UFF
                 <label><input type="checkbox" onclick="window.randomTroops = this.checked"> Random troops</label><hr>
                 <label><input type="number" value="1" id="emoj">
                     <input type="submit" value="toggle emoj" onclick="toggleEmoj(document.getElementById('emoj').value)">
-                    <input type="submit" value="reset emoj" onclick="resetEmoj()"> </label>
-                    <input type="submit" value="active emojs" onclick="activeEmojs()"> </label>
+                    <input type="submit" value="reset emoj" onclick="resetEmoj()">
+                    <input type="submit" value="active emojs" onclick="activeEmojs()"></label><hr>
+                <label>
+                    <input type="number" value="10" id="spamEmoj">
+                    <input type="submit" value="spam emoj" onclick="spamEmoj()">
+                </label>
             </div>
 
             <!-- render -->
@@ -9444,6 +9475,7 @@ I have to create everything like this?! UFF
             <!-- AI -->
             <div id="misc" style="display: none">
             </div>
+
         </div>
     </div>
 </div>
@@ -9489,6 +9521,42 @@ I have to create everything like this?! UFF
         for(let i = 0; i < window.emojExists.length; i++) {
             window.emojExists[i] = false;
             window.emojActual[i] = 0;
+        }
+    }
+
+    let functionSpam = null;
+    let newI;
+    function spamEmoj() {
+        const timer = parseInt(document.getElementById("spamEmoj").value);
+        if (functionSpam == null) {
+            newI = 0;
+            functionSpam = setInterval(doSpam, timer)
+        } else {
+            clearInterval(functionSpam)
+            functionSpam = null;
+        }
+    }
+
+    function doSpam() {
+        let send = false;
+        if (window.emojActual[newI] === undefined) {
+        } else
+        if (window.emojActual[newI] !== 0) {
+            send = true;
+        } else {
+            if (window.emojExists[0] && window.emojActual[newI] !== undefined) {
+                if (window.emojActual[newI - 1] !== 0) {
+                    send = true;
+                }
+            }
+        }
+
+        if (send) {
+            window.sendEmoj(window.emojActual[newI])
+            newI++;
+        } else {
+            newI = 1;
+            window.sendEmoj(window.emojActual[0])
         }
     }
 
@@ -9548,7 +9616,9 @@ I have to create everything like this?! UFF
     function display(name) {
         everyId.forEach(id => {
             document.getElementById(id).style.display = "none";
+            document.getElementById(id + "But").style.fontWeight = "normal";
         })
         document.getElementById(name).style.display = "initial";
+        document.getElementById(name + "But").style.fontWeight = "bold";
     }
 </script>
