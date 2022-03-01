@@ -5492,7 +5492,7 @@
             cv.yt(7);
             z = [];
             // eK = avaible
-            window.test1 = z;
+            window.serverAvaible = z;
             this.uq();
             var I;
             B = Array(9);
@@ -9201,7 +9201,7 @@
         };
         // Send request join
         this.a20 = function(e) {
-            console.log(window.test1)
+            console.log(window.serverAvaible)
             d8[0].y6();
             var a = new Uint8Array(1);
             g = 0;
@@ -9210,7 +9210,17 @@
             c(a, 4, e);
             dH[0].a0l(a)
         };
+        this.getLobby = function(e) {
+            d8[0].y6();
+            var a = new Uint8Array(1);
+            g = 0;
+            c(a, 1, 0);
+            c(a, 3, 2);
+            c(a, 4, e);
+            return a;
+        }
         window.requestJoin = this.a20;
+        window.getLobby = this.getLobby;
         this.a21 = function(e, a) {
             d8[1].y6();
             var u = new Uint8Array(7);
@@ -9378,7 +9388,6 @@ I have to create everything like this?! UFF
         font-size: 25px;
         top: 100px;
         right: 60px;
-        height: 250px;
     }
 
     #headerMenu {
@@ -9432,6 +9441,9 @@ I have to create everything like this?! UFF
         width: 98%;
     }
 
+    input[type=number] {
+        width: 50px
+    }
 
 </style>
 
@@ -9453,6 +9465,18 @@ I have to create everything like this?! UFF
             <!-- self -->
             <div id="combat">
                 <label><input type="checkbox" onclick="window.randomTroops = this.checked"> Random troops</label><hr>
+                <label><input type="submit" onclick="sendBots()" value="Send bot">
+                        nBots: <input type="number" value="1" id="nBots">
+                        Lobby: <input type="number" value="1" id="lobbyBots"></label>
+            </div>
+
+            <!-- render -->
+            <div id="render" style="display: none">
+                <label><input type="checkbox" onclick="window.freezeAI = this.checked" value="0"> Freeze AI</label>
+            </div>
+
+            <!-- lobby -->
+            <div id="move" style="display: none">
                 <label><input type="number" value="1" id="emoj">
                     <input type="submit" value="toggle emoj" onclick="toggleEmoj(document.getElementById('emoj').value)">
                     <input type="submit" value="reset emoj" onclick="resetEmoj()">
@@ -9461,15 +9485,6 @@ I have to create everything like this?! UFF
                     <input type="number" value="10" id="spamEmoj">
                     <input type="submit" value="spam emoj" onclick="spamEmoj()">
                 </label>
-            </div>
-
-            <!-- render -->
-            <div id="render" style="display: none">
-            </div>
-
-            <!-- lobby -->
-            <div id="move" style="display: none">
-                <label><input type="checkbox" onclick="window.freezeAI = this.checked" value="0"> Freeze AI</label>
             </div>
 
             <!-- AI -->
@@ -9486,6 +9501,10 @@ I have to create everything like this?! UFF
     window.freezeAI = false;
     // Make the DIV element draggable:
     dragElementModules(document.getElementById("menu"));
+
+    function sendBots() {
+
+    }
 
     function toggleEmoj(number) {
         if (number !== undefined && number >= 0 && number <= window.emojExists.length) {
