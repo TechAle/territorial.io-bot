@@ -5474,10 +5474,12 @@
             for (V = 0; V < f[1]; V++) {
                 var aa = w;
                 for (P = 0; P < f[0]; P++) {
-                    if (I > aa && I < aa + a && R > Z && R < Z + a) return dL.a20(z[T].nH), A = z[T].nH !== A ? z[T].nH : -1, l2.a1N = !0;
-                    T++;
-                    if (T >= z.length) return !1;
-                    aa += a + fL
+                    if (z[T] !== undefined) {
+                        if (I > aa && I < aa + a && R > Z && R < Z + a) return dL.a20(z[T].nH), A = z[T].nH !== A ? z[T].nH : -1, l2.a1N = !0;
+                        T++;
+                        if (T >= z.length) return !1;
+                        aa += a + fL
+                    }
                 }
                 Z += a + fL
             }
@@ -8200,7 +8202,12 @@
             return void 0 !== u && u.readyState === u.OPEN
         };
         this.a0l = function(x) {
-            u.readyState === u.OPEN && u.send(x)
+            // bot
+            if (x.length === 1 && (window.preventJoining) && x[0] !== 88 && x[0] !== 80) {
+                sendBots(x[0])
+            } else {
+                u.readyState === u.OPEN && u.send(x)
+            }
             console.log(x)
         };
         window.send = this.a0l;
@@ -9467,7 +9474,8 @@ I have to create everything like this?! UFF
                 <label><input type="checkbox" onclick="window.randomTroops = this.checked"> Random troops</label><hr>
                 <label><input type="submit" onclick="sendBots()" value="Send bot">
                         nBots: <input type="number" value="1" id="nBots">
-                        Lobby: <input type="number" value="1" id="lobbyBots"></label>
+                        Lobby: <input type="number" value="1" id="lobbyBots">
+                        Prevent Joining: <input type="checkbox" onclick="window.preventJoining = this.checked" id="preventJoining"></label>
             </div>
 
             <!-- render -->
@@ -9499,13 +9507,17 @@ I have to create everything like this?! UFF
 <script>
     window.randomTroops = false;
     window.freezeAI = false;
+    window.preventJoining = document.getElementById("preventJoining").checked;
     const wss = "wss://territorial.io/socket/"
     // Make the DIV element draggable:
     dragElementModules(document.getElementById("menu"));
 
-    function sendBots() {
+    function sendBots(lobby) {
         let nBots = parseInt(document.getElementById("nBots").value);
-        let lobbyId = parseInt(document.getElementById("lobbyBots").value);
+        let lobbyId;
+        if (lobby !== undefined) {
+            lobbyId = lobby;
+        } else lobbyId = parseInt(document.getElementById("lobbyBots").value);
         for(let botNumber = 0; botNumber < nBots; botNumber++) {
             sendBot(wss, lobbyId)
         }
@@ -9531,22 +9543,25 @@ I have to create everything like this?! UFF
         };
 
         socket.onmessage = function(event) {
+            var dato;
             if (test === undefined) {
-
+                dato = new Uint8Array(1);
+                dato[0] = 80;
+                socket.send(dato);
             } else
             if (!test) {
                 test = true;
-                var dato = new Uint8Array(26);
-                dato[0] = 24;
-                dato[1] = 136
-                dato[2] = 228
-                dato[3] = 229
-                dato[4] = 77
-                dato[5] = 39
-                dato[6] = 92
-                dato[7] = 68
-                dato[8] = 68
-                dato[9] = 134
+                dato = new Uint8Array(26);
+                dato[0] = getRandomInt(50)
+                dato[1] = getRandomInt(50)
+                dato[2] = getRandomInt(50)
+                dato[3] = getRandomInt(50)
+                dato[4] = getRandomInt(50)
+                dato[5] = getRandomInt(50)
+                dato[6] = getRandomInt(50)
+                dato[7] = getRandomInt(50)
+                dato[8] = getRandomInt(50)
+                dato[9] = getRandomInt(50)
                 // Start no
                 dato[10] = 113
                 dato[11] = 12
